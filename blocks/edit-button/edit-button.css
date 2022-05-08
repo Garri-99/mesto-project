@@ -1,0 +1,9 @@
+.edit-button {
+  width: 24px;
+  transition: opacity .5s;
+  padding-left: 18px;
+}
+
+.edit-button:hover {
+  opacity: .6;
+}
