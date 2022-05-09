@@ -1,0 +1,10 @@
+.add-button__rect {
+  width: 148px;
+  height: 48px;
+}
+
+@media screen and (max-width: 600px) {
+  .add-button__rect {
+    width: 280px;
+  }
+}

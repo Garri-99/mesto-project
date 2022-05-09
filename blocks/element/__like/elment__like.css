@@ -3,3 +3,7 @@
   height: 19px;
   color: green;
 }
+
+.element__like:hover {
+  opacity: .6;
+}
