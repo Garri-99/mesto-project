@@ -6,7 +6,13 @@
   color: #545454;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 879px) {
+  .footer {
+    max-width: calc(100% - 20px*2);
+  }
+}
+
+@media screen and (max-width: 680px) {
   .footer {
     max-width: calc(100% - 19px*2);
   }

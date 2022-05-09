@@ -9,7 +9,7 @@
   opacity: .6;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 680px) {
   .add-button {
     width: 282px;
     background: url(../../images/x.svg) no-repeat center/16px 16px ;
