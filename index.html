@@ -10,13 +10,33 @@
   <body class="page">
     <header class="header page__header">
       <img
-        src="./images/Vector.svg"
+        src="./images/logo.svg"
         alt="Логотип c надписью: 'Mesto Russia'."
         class="logo"
       />
-      <div class="header__line"></div>
     </header>
     <main class="content">
+      <section class="popup popup_opened">
+        <div class="popup__container">
+          <button class="popup__close"></button>
+          <form class="form" name="edit-profile">
+            <h2 class="form__title">Редактировать профиль</h2>
+            <input
+              name="firstname"
+              type="text"
+              class="form__field"
+              value="Жак-Ив Кусто"
+            />
+            <input
+              name="activity"
+              type="text"
+              class="form__field"
+              value="Исследователь океана"
+            />
+            <input type="submit" class="form__submit" value="Cохранить" />
+          </form>
+        </div>
+      </section>
       <section class="profile content__profile">
         <div class="profile__container">
           <img
@@ -24,90 +44,87 @@
             alt="Жак-Ив Кусто в красной шапке улыбается на фоне моря."
             class="profile__avatar"
           />
-          <div class="profile__info">
-            <h1 class="profile__info-name">
-              Жак-Ив Кусто<img
-                src="./images/Edit-Button.svg"
-                alt=""
-                class="edit-button"
-              />
-            </h1>
-            <p class="profile__info-activity">Исследователь океана</p>
-          </div>
-          <div class="popup">
-            <form class="popup__container">
-              <h2 class="popup__title">Редактировать профиль</h2>
-              <input type="text" class="popup__field" value="Жак-Ив Кусто">
-              <input type="text" class="popup__field" value="Исследователь океана">
-              <input type="submit" class="popup__submit" value="Cохранить">
-              <img src="./images/Close-icon.svg" alt="символ - карандаш." class="popup__close">
-            </form>
+          <div class="profile__baseline">
+            <div class="profile__info">
+              <h1 class="profile__info-name">Жак-Ив Кусто</h1>
+              <p class="profile__info-activity">Исследователь океана</p>
+            </div>
+            <button class="profile__edit-button"></button>
           </div>
         </div>
-        <svg
-          class="add-button"
-          width="150"
-          height="50"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect
-            class="add-button__rect"
-            width=""
-            height=""
-            x="1"
-            y="1"
-            rx="1"
-            stroke="#fff"
-            stroke-width="2"
-          />
-        </svg>
+        <button class="profile__add-button"></button>
       </section>
       <section class="elements content__elements">
         <div class="element">
-          <img src="./images/karachaevsk.jpg" alt="Храм в горах Карачаевска." class="element__pic" />
+          <img
+            src="./images/karachaevsk.jpg"
+            alt="Храм в горах Карачаевска."
+            class="element__pic"
+          />
           <div class="element__flex-container">
             <h2 class="element__text">Карачаевск</h2>
-            <img src="./images/like.svg" alt="кнопка - лайк в виде сердца." class="element__like" />
+            <button class="element__like"></button>
           </div>
         </div>
         <div class="element">
-          <img src="./images/elbrus.jpg" alt="Гора Эльбру на фоне оранжевого заката." class="element__pic" />
+          <img
+            src="./images/elbrus.jpg"
+            alt="Гора Эльбру на фоне оранжевого заката."
+            class="element__pic"
+          />
           <div class="element__flex-container">
             <h2 class="element__text">Гора Эльбрус</h2>
-            <img src="./images/like.svg" alt="кнопка - лайк в виде сердца." class="element__like" />
+            <button class="element__like"></button>
           </div>
         </div>
         <div class="element">
-          <img src="./images/dombay.jpg" alt="Снежные вершины гор Домбай, серое небо." class="element__pic" />
+          <img
+            src="./images/dombay.jpg"
+            alt="Снежные вершины гор Домбай, серое небо."
+            class="element__pic"
+          />
           <div class="element__flex-container">
             <h2 class="element__text">Домбай</h2>
-            <img src="./images/like.svg" alt="кнопка - лайк в виде сердца." class="element__like" />
+            <button class="element__like"></button>
           </div>
         </div>
         <div class="element">
-          <img src="./images/elbrus.jpg" alt="Гора Эльбру на фоне оранжевого заката." class="element__pic" />
+          <img
+            src="./images/elbrus.jpg"
+            alt="Гора Эльбру на фоне оранжевого заката."
+            class="element__pic"
+          />
           <div class="element__flex-container">
             <h2 class="element__text">Гора Эльбрус</h2>
-            <img src="./images/like.svg" alt="кнопка - лайк в виде сердца." class="element__like" />
+            <button class="element__like"></button>
           </div>
         </div>
         <div class="element">
-          <img src="./images/dombay.jpg" alt="Снежные вершины гор Домбай, серое небо." class="element__pic" />
+          <img
+            src="./images/dombay.jpg"
+            alt="Снежные вершины гор Домбай, серое небо."
+            class="element__pic"
+          />
           <div class="element__flex-container">
             <h2 class="element__text">Домбай</h2>
-            <img src="./images/like.svg" alt="" class="element__like" />
+            <button class="element__like"></button>
           </div>
         </div>
         <div class="element">
-          <img src="./images/karachaevsk.jpg" alt="Храм в горах Карачаевска." class="element__pic" />
+          <img
+            src="./images/karachaevsk.jpg"
+            alt="Храм в горах Карачаевска."
+            class="element__pic"
+          />
           <div class="element__flex-container">
             <h2 class="element__text">Карачаево-Черкесия</h2>
-            <img src="./images/like.svg" alt="кнопка - лайк в виде сердца." class="element__like" />
+            <button class="element__like"></button>
           </div>
         </div>
       </section>
     </main>
-    <footer class="footer page__footer">&copy; 2020 Mesto Russia</footer>
+    <footer class="footer page__footer">
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+    </footer>
   </body>
 </html>
