@@ -16,27 +16,6 @@
       />
     </header>
     <main class="content">
-      <section class="popup popup_opened">
-        <div class="popup__container">
-          <button class="popup__close"></button>
-          <form class="form" name="edit-profile">
-            <h2 class="form__title">Редактировать профиль</h2>
-            <input
-              name="firstname"
-              type="text"
-              class="form__field"
-              value="Жак-Ив Кусто"
-            />
-            <input
-              name="activity"
-              type="text"
-              class="form__field"
-              value="Исследователь океана"
-            />
-            <input type="submit" class="form__submit" value="Cохранить" />
-          </form>
-        </div>
-      </section>
       <section class="profile content__profile">
         <div class="profile__container">
           <img
@@ -49,10 +28,10 @@
               <h1 class="profile__info-name">Жак-Ив Кусто</h1>
               <p class="profile__info-activity">Исследователь океана</p>
             </div>
-            <button class="profile__edit-button"></button>
+            <button type="button" class="profile__edit-button"></button>
           </div>
         </div>
-        <button class="profile__add-button"></button>
+        <button type="button" class="profile__add-button"></button>
       </section>
       <section class="elements content__elements">
         <div class="element">
@@ -63,7 +42,7 @@
           />
           <div class="element__flex-container">
             <h2 class="element__text">Карачаевск</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </div>
         <div class="element">
@@ -74,7 +53,7 @@
           />
           <div class="element__flex-container">
             <h2 class="element__text">Гора Эльбрус</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </div>
         <div class="element">
@@ -85,7 +64,7 @@
           />
           <div class="element__flex-container">
             <h2 class="element__text">Домбай</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </div>
         <div class="element">
@@ -96,7 +75,7 @@
           />
           <div class="element__flex-container">
             <h2 class="element__text">Гора Эльбрус</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </div>
         <div class="element">
@@ -107,7 +86,7 @@
           />
           <div class="element__flex-container">
             <h2 class="element__text">Домбай</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </div>
         <div class="element">
@@ -118,11 +97,32 @@
           />
           <div class="element__flex-container">
             <h2 class="element__text">Карачаево-Черкесия</h2>
-            <button class="element__like"></button>
+            <button type="button" class="element__like"></button>
           </div>
         </div>
       </section>
     </main>
+    <div class="popup">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <form class="form" name="edit-profile">
+          <h2 class="form__title">Редактировать профиль</h2>
+          <input
+            name="firstname"
+            type="text"
+            class="form__field"
+            value="Жак-Ив Кусто"
+          />
+          <input
+            name="activity"
+            type="text"
+            class="form__field"
+            value="Исследователь океана"
+          />
+          <input type="submit" class="form__submit" value="Cохранить" />
+        </form>
+      </div>
+    </div>
     <footer class="footer page__footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
