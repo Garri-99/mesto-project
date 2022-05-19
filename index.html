@@ -102,29 +102,51 @@
         </div>
       </section>
     </main>
-    <div class="popup">
+    <div id="edit-popup" class="popup">
       <div class="popup__container">
-        <button type="button" class="popup__close"></button>
-        <form class="form" name="edit-profile">
+        <button id="closeEditPopup" type="button" class="popup__close"></button>
+        <form id="edit-form" class="form" name="edit-profile">
           <h2 class="form__title">Редактировать профиль</h2>
           <input
             name="firstname"
             type="text"
             class="form__field"
-            value="Жак-Ив Кусто"
+            placeholder="Имя"
           />
           <input
             name="activity"
             type="text"
             class="form__field"
-            value="Исследователь океана"
+            placeholder="О себе"
           />
           <input type="submit" class="form__submit" value="Cохранить" />
+        </form>
+      </div>
+    </div>
+    <div id="add-popup" class="popup">
+      <div class="popup__container">
+        <button id="closeAddPopup" type="button" class="popup__close"></button>
+        <form id="add-form" class="form" name="edit-profile">
+          <h2 class="form__title">Новое место</h2>
+          <input
+            name="title"
+            type="text"
+            class="form__field"
+            placeholder="Назавание"
+          />
+          <input
+            name="url"
+            type="text"
+            class="form__field"
+            placeholder="Ссылка на картинку"
+          />
+          <input type="submit" class="form__submit" value="Создать" />
         </form>
       </div>
     </div>
     <footer class="footer page__footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+    <script src="./script.js"></script>
   </body>
 </html>
