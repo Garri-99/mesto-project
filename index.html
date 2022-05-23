@@ -33,74 +33,7 @@
         </div>
         <button type="button" class="profile__add-button"></button>
       </section>
-      <section class="elements content__elements">
-        <div class="element">
-          <img
-            src="./images/karachaevsk.jpg"
-            alt="Храм в горах Карачаевска."
-            class="element__pic"
-          />
-          <div class="element__flex-container">
-            <h2 class="element__text">Карачаевск</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            src="./images/elbrus.jpg"
-            alt="Гора Эльбру на фоне оранжевого заката."
-            class="element__pic"
-          />
-          <div class="element__flex-container">
-            <h2 class="element__text">Гора Эльбрус</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            src="./images/dombay.jpg"
-            alt="Снежные вершины гор Домбай, серое небо."
-            class="element__pic"
-          />
-          <div class="element__flex-container">
-            <h2 class="element__text">Домбай</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            src="./images/elbrus.jpg"
-            alt="Гора Эльбру на фоне оранжевого заката."
-            class="element__pic"
-          />
-          <div class="element__flex-container">
-            <h2 class="element__text">Гора Эльбрус</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            src="./images/dombay.jpg"
-            alt="Снежные вершины гор Домбай, серое небо."
-            class="element__pic"
-          />
-          <div class="element__flex-container">
-            <h2 class="element__text">Домбай</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>
-        <div class="element">
-          <img
-            src="./images/karachaevsk.jpg"
-            alt="Храм в горах Карачаевска."
-            class="element__pic"
-          />
-          <div class="element__flex-container">
-            <h2 class="element__text">Карачаево-Черкесия</h2>
-            <button type="button" class="element__like"></button>
-          </div>
-        </div>
-      </section>
+      <section class="elements content__elements"></section>
     </main>
     <div id="edit-popup" class="popup">
       <div class="popup__container">
@@ -129,12 +62,14 @@
         <form id="add-form" class="form" name="edit-profile">
           <h2 class="form__title">Новое место</h2>
           <input
+            id="title"
             name="title"
             type="text"
             class="form__field"
             placeholder="Назавание"
           />
           <input
+            id="url"
             name="url"
             type="text"
             class="form__field"
@@ -147,6 +82,20 @@
     <footer class="footer page__footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+    <template id="card-template">
+      <div class="element">
+        <img
+          src=""
+          alt=""
+          class="element__pic"
+        />
+        <div class="element__flex-container">
+          <h2 class="element__text"></h2>
+          <button type="button" class="element__like"></button>
+        </div>
+        <button class="element__reset"></button>
+      </div>
+    </template>
     <script src="./script.js"></script>
   </body>
 </html>

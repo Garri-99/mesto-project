@@ -1,0 +1,16 @@
+.element__reset {
+  padding: 0;
+  border: 0;
+  width: 18px;
+  height: 19px;
+  cursor: pointer;
+  background: url(../../../images/Trash.svg) no-repeat center;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.element__reset:hover {
+  opacity: .6;
+}

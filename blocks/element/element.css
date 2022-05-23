@@ -3,4 +3,5 @@
   width: 282px;
   background-color: white;
   overflow: hidden;
+  position: relative;
 }
