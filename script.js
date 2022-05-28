@@ -53,10 +53,14 @@ function addCard(cardName, imgSrc) {
   cardElement.querySelector(".popup__close").addEventListener("click", () => {
     cardElement.querySelector(".popup").classList.toggle("popup_opened");
   });
-  cardElement.querySelector(".element__like").addEventListener("click", evt => {
+  cardElement
+    .querySelector(".element__like")
+    .addEventListener("click", (evt) => {
       evt.target.classList.toggle("element__like_active");
     });
-  cardElement.querySelector(".element__reset").addEventListener("click", evt => {
+  cardElement
+    .querySelector(".element__reset")
+    .addEventListener("click", (evt) => {
       evt.target.parentElement.remove();
     });
   elements.prepend(cardElement);
@@ -102,6 +106,6 @@ const initialCards = [
   },
 ];
 
-initialCards.forEach(item => {
-  addCard(item.name, item.link)
-})
+initialCards.forEach((item) => {
+  addCard(item.name, item.link);
+});
