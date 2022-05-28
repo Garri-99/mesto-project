@@ -43,18 +43,20 @@ function addCard(cardName, imgSrc) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
 
   cardElement.querySelector(".element__pic").src = imgSrc;
-  cardElement
-    .querySelector(".element__flex-container")
-    .querySelector(".element__text").textContent = cardName;
-  cardElement
-    .querySelector(".element__flex-container")
-    .querySelector(".element__like")
-    .addEventListener("click", function (evt) {
+  cardElement.querySelector(".popup__pic").src = imgSrc;
+  cardElement.querySelector(".element__text").textContent = cardName;
+  cardElement.querySelector(".popup__image-caption").textContent = cardName;
+
+  cardElement.querySelector(".element__pic").addEventListener("click", () => {
+    cardElement.querySelector(".popup").classList.toggle("popup_opened");
+  });
+  cardElement.querySelector(".popup__close").addEventListener("click", () => {
+    cardElement.querySelector(".popup").classList.toggle("popup_opened");
+  });
+  cardElement.querySelector(".element__like").addEventListener("click", evt => {
       evt.target.classList.toggle("element__like_active");
     });
-  cardElement
-    .querySelector(".element__reset")
-    .addEventListener("click", function (evt) {
+  cardElement.querySelector(".element__reset").addEventListener("click", evt => {
       evt.target.parentElement.remove();
     });
   elements.prepend(cardElement);
@@ -100,6 +102,6 @@ const initialCards = [
   },
 ];
 
-for (let i = 0; i < initialCards.length; i++) {
-  addCard(initialCards[i].name, initialCards[i].link);
-}
+initialCards.forEach(item => {
+  addCard(item.name, item.link)
+})
