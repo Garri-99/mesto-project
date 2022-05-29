@@ -1,14 +1,19 @@
 .profile__info-activity {
   margin: 8px 0 0;
   padding: 0;
+  max-width: 400px;
   font-weight: normal;
   font-size: 18px;
   line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 800px) {
   .profile__info-activity {
+    max-width: 250px;
     font-size: 14px;
     line-height: 17px;
   }
