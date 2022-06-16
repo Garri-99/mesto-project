@@ -18,6 +18,23 @@ const cardsContainer = document.querySelector(".elements");
 const cardTemplate = document.querySelector("#card-template").content;
 const popupPic = imagePopup.querySelector(".popup__pic");
 const popupImageCaption = imagePopup.querySelector(".popup__image-caption");
+const popups = document.querySelectorAll('.popup');
+const body = document.body;
+
+body.addEventListener('click', evt => {
+  if (evt.target.classList.contains('popup')) {
+    closePopup(evt.target);
+  }
+})
+
+popups.forEach((popup) => {
+  body.addEventListener('keydown', (evt) => {
+    if (evt.key == 'Escape') {
+      evt.preventDefault()
+      closePopup(popup)
+    }
+  })
+})
 
 btnEditProfile.addEventListener("click", () => {
   nameProfile.value = profileName.textContent;
