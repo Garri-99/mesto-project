@@ -12,8 +12,8 @@
   font-family: inherit;
 }
 
-.form__field:first-of-type {
-  margin-bottom: 30px;
+.form__field:nth-of-type(n + 2) {
+  margin-top: 30px;
 }
 
 @media screen and (max-width: 600px) {

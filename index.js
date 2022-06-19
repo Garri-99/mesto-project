@@ -1,17 +1,22 @@
+const avatarPopup = document.querySelector("#avatar-popup");
 const profilePopup = document.querySelector("#profile-popup");
 const cardPopup = document.querySelector("#card-popup");
 const imagePopup = document.querySelector("#image-popup");
 const btnEditProfile = document.querySelector(".profile__edit-button");
 const btnAddCard = document.querySelector(".profile__add-button");
+const avatarIcon = document.querySelector('.profile__avatar')
+const btnCloseAvatarPopup = document.querySelector("#close-avatar-popup");
 const btnCloseProfilePopup = document.querySelector("#close-edit-popup");
 const btnCloseCardPopup = document.querySelector("#close-add-popup");
 const btnCloseImagePopup = document.querySelector("#close-image-popup");
 const formProfile = document.querySelector("#form-profile");
 const formCard = document.querySelector("#form-card");
+const formAvatar = document.querySelector('#form-avatar')
 const nameProfile = document.querySelector("#firstname");
 const activityProfile = document.querySelector("#activity");
 const titleCard = document.querySelector("#title");
 const srcCard = document.querySelector("#url");
+const avatarInput = document.querySelector('#url-avatar')
 const profileName = document.querySelector(".profile__info-name");
 const profileActivity = document.querySelector(".profile__info-activity");
 const cardsContainer = document.querySelector(".elements");
@@ -56,6 +61,21 @@ btnCloseCardPopup.addEventListener("click", () => closePopup(cardPopup));
 formCard.addEventListener("submit", addSubmitHandler);
 
 btnCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));
+
+btnCloseAvatarPopup.addEventListener("click", () => closePopup(avatarPopup));
+
+formAvatar.addEventListener('submit', handlerAvatarsubmit)
+
+avatarIcon.addEventListener('click', () => {
+  openPopup(avatarPopup)
+})
+
+function handlerAvatarsubmit(evt) {
+  evt.preventDefault();
+
+  avatarIcon.src = avatarInput.value
+  closePopup(avatarPopup)
+}
 
 function openPopup(popup) {
   popup.classList.add("popup_opened");
