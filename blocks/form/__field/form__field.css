@@ -10,9 +10,6 @@
   font-size: 14px;
   line-height: 17px;
   font-family: inherit;
-}
-
-.form__field:nth-of-type(n + 2) {
   margin-top: 30px;
 }
 
