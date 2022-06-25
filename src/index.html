@@ -4,13 +4,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Mesto Russia</title>
   </head>
   <body class="page">
     <header class="header page__header">
       <img
-        src="./images/logo.svg"
+        src="<%=require('./images/logo.svg')%>"
         alt="Логотип c надписью: 'Mesto Russia'."
         class="logo"
       />
@@ -19,7 +18,7 @@
       <section class="profile content__profile">
         <div class="profile__container">
           <img
-            src="./images/jack.jpg"
+            src="<%=require('./images/jack.jpg')%>"
             alt="Жак-Ив Кусто в красной шапке улыбается на фоне моря."
             class="profile__avatar"
           />
@@ -156,7 +155,5 @@
         <button class="element__reset"></button>
       </div>
     </template>
-    <script src="./cards.js"></script>
-    <script src="./index.js"></script>
   </body>
 </html>
