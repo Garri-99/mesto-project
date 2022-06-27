@@ -82,19 +82,28 @@ export function toggleButtonState(inputList, buttonElement, inactiveButtonClass)
   }
 }
 
-export function enableValidation(obj) {
-  const formList = Array.from(document.querySelectorAll(obj.formSelector));
+export function enableValidation(validationConfig) {
+  const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
     setEventListeners(
       formElement,
-      obj.inputSelector,
-      obj.submitButtonSelector,
-      obj.inactiveButtonClass,
-      obj.inputErrorClass,
-      obj.errorClass
+      validationConfig.inputSelector,
+      validationConfig.submitButtonSelector,
+      validationConfig.inactiveButtonClass,
+      validationConfig.inputErrorClass,
+      validationConfig.errorClass
     );
   });
+}
+
+export function resetFormCondition(validationConfig, popup) {
+  const inputList = Array.from(popup.querySelectorAll(validationConfig.inputSelector));
+  const buttonElement = popup.querySelector(validationConfig.submitButtonSelector);
+  inputList.forEach((inputElement) => {
+    hideInputError(popup, inputElement, validationConfig.inputErrorClass, validationConfig.errorClass)
+  });
+  toggleButtonState(inputList, buttonElement, validationConfig.inactiveButtonClass);
 }

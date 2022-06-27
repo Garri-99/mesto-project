@@ -1,4 +1,4 @@
-import { renderCard } from "./card";
+import { renderCard } from '../index'
 import {
   profileName,
   profileActivity,

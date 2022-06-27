@@ -20,6 +20,14 @@ export const popupPic = imagePopup.querySelector(".popup__pic");
 export const popupImageCaption = imagePopup.querySelector(".popup__image-caption");
 export const body = document.body;
 export const popups = document.querySelectorAll('.popup');
+export const validationConfig = {
+  formSelector: '.form',
+  inputSelector: '.form__field',
+  submitButtonSelector: '.form__submit',
+  inactiveButtonClass: 'form__submit_inactive',
+  inputErrorClass: 'form__field_error',
+  errorClass: 'form__input-error_active'
+};
 export const initialCards = [
   {
     name: "Архыз",

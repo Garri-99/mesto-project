@@ -3,7 +3,6 @@ import {
   popupPic,
   popupImageCaption,
   cardTemplate,
-  cardsContainer,
 } from "./constants";
 import { openPopup } from "./modal";
 
@@ -22,7 +21,7 @@ function handlerResetClick(evt) {
   evt.target.closest(".element").remove();
 }
 
-function createCard(cardName, imgSrc) {
+export function createCard(cardName, imgSrc) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const cardPic = cardElement.querySelector(".element__pic");
 
@@ -41,8 +40,4 @@ function createCard(cardName, imgSrc) {
     .addEventListener("click", handlerResetClick);
 
   return cardElement;
-}
-
-export function renderCard(name, src) {
-  cardsContainer.prepend(createCard(name, src));
 }
