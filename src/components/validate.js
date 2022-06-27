@@ -1,59 +1,100 @@
-function showInputError(formElement, inputElement, errorMessage) {
+function showInputError(
+  formElement,
+  inputElement,
+  errorMessage,
+  inputErrorClass,
+  errorClass
+) {
   const errorEliment = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('form__field_error');
+  inputElement.classList.add(inputErrorClass);
   errorEliment.textContent = errorMessage;
-  errorEliment.classList.add('form__input-error_active');
+  errorEliment.classList.add(errorClass);
 }
 
-function hideInputError(formElement, inputElement) {
+export function hideInputError(
+  formElement,
+  inputElement,
+  inputErrorClass,
+  errorClass
+) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('form__field_error');
-  errorElement.classList.remove('form__input-error_active');
+  inputElement.classList.remove(inputErrorClass);
+  errorElement.classList.remove(errorClass);
   errorElement.textContent = '';
 }
 
-function checkInputValidity(formElement, inputElement) {
+function checkInputValidity(
+  formElement,
+  inputElement,
+  inputErrorClass,
+  errorClass
+) {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(
+      formElement,
+      inputElement,
+      inputElement.validationMessage,
+      inputErrorClass,
+      errorClass
+    );
   } else {
-    hideInputError(formElement, inputElement)
+    hideInputError(formElement, inputElement, inputErrorClass, errorClass);
   }
 }
 
-function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.form__field'));
-  const buttonElement = formElement.querySelector('.form__submit')
-  toggleButtonState(inputList, buttonElement)
+function setEventListeners(
+  formElement,
+  inputSelectort,
+  submitButtonSelector,
+  inactiveButtonClass,
+  inputErrorClass,
+  errorClass
+) {
+  const inputList = Array.from(formElement.querySelectorAll(inputSelectort));
+  const buttonElement = formElement.querySelector(submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, inactiveButtonClass);
   inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input',  () => {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+    inputElement.addEventListener("input", () => {
+      checkInputValidity(
+        formElement,
+        inputElement,
+        inputErrorClass,
+        errorClass
+      );
+      toggleButtonState(inputList, buttonElement, inactiveButtonClass);
     });
   });
-};
+}
 
 function hasInvalidInput(inputList) {
-  return inputList.some(input => {
-    return !input.validity.valid
-   })
+  return inputList.some((input) => {
+    return !input.validity.valid;
+  });
 }
 
-function toggleButtonState(inputList, buttonElement) {
+export function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('form__submit_inactive');
-    buttonElement.setAttribute('disabled', true)
+    buttonElement.classList.add(inactiveButtonClass);
+    buttonElement.setAttribute("disabled", true);
   } else {
-    buttonElement.classList.remove('form__submit_inactive')
-    buttonElement.removeAttribute('disabled')
+    buttonElement.classList.remove(inactiveButtonClass);
+    buttonElement.removeAttribute("disabled");
   }
 }
 
-export function enableValidation() {
-  const formList = Array.from(document.querySelectorAll('.form'));
-  formList.forEach(formElement => {
-    formElement.addEventListener('submit', evt => {
+export function enableValidation(obj) {
+  const formList = Array.from(document.querySelectorAll(obj.formSelector));
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement);
+    setEventListeners(
+      formElement,
+      obj.inputSelector,
+      obj.submitButtonSelector,
+      obj.inactiveButtonClass,
+      obj.inputErrorClass,
+      obj.errorClass
+    );
   });
-};
+}
