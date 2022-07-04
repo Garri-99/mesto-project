@@ -11,7 +11,7 @@ function showInputError(
   errorEliment.classList.add(errorClass);
 }
 
-export function hideInputError(
+function hideInputError(
   formElement,
   inputElement,
   inputErrorClass,
@@ -72,7 +72,7 @@ function hasInvalidInput(inputList) {
   });
 }
 
-export function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
+function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(inactiveButtonClass);
     buttonElement.setAttribute("disabled", true);

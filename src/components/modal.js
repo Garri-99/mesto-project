@@ -7,6 +7,8 @@ import {
   profilePopup,
   cardPopup,
   imagePopup,
+  btnCloseAvatarPopup,
+  avatarPopup,
 } from "./constants";
 
 function handlerEsc(evt) {
@@ -34,6 +36,7 @@ body.addEventListener("click", (evt) => {
   }
 });
 
+btnCloseAvatarPopup.addEventListener("click", () => closePopup(avatarPopup));
 btnCloseProfilePopup.addEventListener("click", () => closePopup(profilePopup));
 btnCloseCardPopup.addEventListener("click", () => closePopup(cardPopup));
 btnCloseImagePopup.addEventListener("click", () => closePopup(imagePopup));

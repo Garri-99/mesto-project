@@ -1,0 +1,11 @@
+.profile__edit-avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: url(../../../images/pen.svg) no-repeat center/26px 26px rgba(0, 0, 0, .8);
+  visibility: hidden;
+  cursor: pointer;
+}

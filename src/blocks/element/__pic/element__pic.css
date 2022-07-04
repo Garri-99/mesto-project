@@ -1,5 +1,6 @@
 .element__pic {
   width: 282px;
-  height: 282px;
+  aspect-ratio: 1;
+  object-fit: fill;
   cursor: pointer;
 }

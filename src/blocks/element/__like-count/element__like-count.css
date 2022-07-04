@@ -1,0 +1,7 @@
+.element__like-count {
+  visibility: visible;
+  color: black;
+  font-size: 13px;
+  line-height: 16px;
+  margin-top: 3px;
+}

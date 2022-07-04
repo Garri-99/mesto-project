@@ -1,4 +1,5 @@
 .element__reset {
+  display: none;
   padding: 0;
   border: 0;
   width: 18px;

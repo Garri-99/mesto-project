@@ -17,15 +17,18 @@
     <main class="content">
       <section class="profile content__profile">
         <div class="profile__container">
-          <img
-            src="<%=require('./images/jack.jpg')%>"
-            alt="Жак-Ив Кусто в красной шапке улыбается на фоне моря."
-            class="profile__avatar"
-          />
+          <div class="profile__avatar-hover">
+            <img
+              src=""
+              alt="Жак-Ив Кусто в красной шапке улыбается на фоне моря."
+              class="profile__avatar"
+            />
+            <botton class="profile__edit-avatar"></botton>
+          </div>
           <div class="profile__baseline">
             <div class="profile__info">
-              <h1 class="profile__info-name">Жак-Ив Кусто</h1>
-              <p class="profile__info-activity">Исследователь океана</p>
+              <h1 class="profile__info-name"></h1>
+              <p class="profile__info-activity"></p>
             </div>
             <button type="button" class="profile__edit-button"></button>
           </div>
@@ -50,18 +53,19 @@
             id="url-avatar"
             name="url-avatar"
             type="url"
+            required
             class="form__field"
-            placeholder="https://somewebsite.com/someimage.jpg"
+            placeholder="Ссылка на картинку"
           />
           <span class="form__input-error url-avatar-error"></span>
-          <input type="submit" class="form__submit" value="Сохранить" />
+          <input id="btn-avatar-submit" type="submit" class="form__submit" value="Сохранить" />
         </form>
       </div>
     </div>
     <div id="profile-popup" class="popup">
       <div class="popup__container">
         <button
-          id="close-edit-popup"
+          id="close-profile-popup"
           type="button"
           class="popup__close"
         ></button>
@@ -93,7 +97,7 @@
             />
             <span class="form__input-error activity-error"></span>
           </label>
-          <input type="submit" class="form__submit" value="Cохранить" />
+          <input id="btn-profile-submit" type="submit" class="form__submit" value="Cохранить" />
         </form>
       </div>
     </div>
@@ -130,7 +134,7 @@
             />
             <span class="form__input-error url-error"></span>
           </label>
-          <input type="submit" class="form__submit" value="Создать" />
+          <input id="btn-card-submit" type="submit" class="form__submit" value="Создать" />
         </form>
       </div>
     </div>
@@ -150,7 +154,10 @@
         <img src="" alt="" class="element__pic" />
         <div class="element__flex-container">
           <h2 class="element__text"></h2>
-          <button type="button" class="element__like"></button>
+          <figure class="element__like-figure">
+            <button type="button" class="element__like"></button>
+            <figcaption class="element__like-count"></figcaption>
+          </figure>
         </div>
         <button class="element__reset"></button>
       </div>
