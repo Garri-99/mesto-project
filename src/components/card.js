@@ -18,28 +18,21 @@ function handlerCardClick(name, src) {
 function handlerLikeClick(evt) {
   const card = evt.target.closest(".element");
   const likeCount = card.querySelector(".element__like-count");
-  evt.target.classList.toggle("element__like_active");
-  if (evt.target.classList.contains("element__like_active")) {
+  if (!evt.target.classList.contains("element__like_active")) {
     putLike(card.id)
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        likeCount.textContent = res.likes.length;
+        evt.target.classList.toggle("element__like_active");
       })
-      .then((res) => (likeCount.textContent = res.likes.length))
       .catch((err) => {
         console.log(err);
       });
   } else {
     deleteLike(card.id)
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
+        likeCount.textContent = res.likes.length;
+        evt.target.classList.toggle("element__like_active");
       })
-      .then((res) => (likeCount.textContent = res.likes.length))
       .catch((err) => {
         console.log(err);
       });
@@ -47,11 +40,19 @@ function handlerLikeClick(evt) {
 }
 
 function handlerResetClick(evt) {
-  evt.target.closest(".element").remove();
-  deleteCard(evt.target.closest(".element").id);
+  deleteCard(evt.target.closest(".element").id)
+    .then(() => evt.target.closest(".element").remove())
+    .catch((err) => console.log(err));
 }
 
-function createCard(cardName, imgSrc, count, id, isMyCard, isLike = false) {
+function createCard(
+  cardName,
+  imgSrc,
+  count,
+  id,
+  isMyCard = false,
+  isLike = false
+) {
   const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
   const cardPic = cardElement.querySelector(".element__pic");
   const btnReset = cardElement.querySelector(".element__reset");

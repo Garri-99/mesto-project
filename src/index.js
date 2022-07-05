@@ -16,58 +16,38 @@ import {
   avatarPopup,
   formAvatar,
 } from "./components/constants";
-import { openPopup } from "./components/modal";
-import { enableValidation, resetFormCondition } from "./components/validate";
 import {
+  openPopup,
   submitEditProfileForm,
   submitAddCardForm,
   submitEditAvatar,
-} from "./components/utils";
-import { getInitialCards, getProfile } from "./components/api";
+} from "./components/modal";
+import { enableValidation, resetFormCondition } from "./components/validate";
+import { getCards, getUserInfo } from "./components/api";
 import { renderCard } from "./components/card";
 
-getProfile()
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then((res) => {
-    profileAvatar.src = res.avatar;
-    profileName.textContent = res.name;
-    profileActivity.textContent = res.about;
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+let myId;
 
-getInitialCards()
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка: ${res.status}`);
-  })
-  .then((res) => {
-    res.forEach((item) => {
-      const isMyCard = item.owner._id === "e51fd23982df883c4969b504";
-      const isLike = item.likes.some(
-        (user) => user._id === "e51fd23982df883c4969b504"
-      );
+Promise.all([getUserInfo(), getCards()])
+  .then(([userData, cards]) => {
+    profileAvatar.src = userData.avatar;
+    profileName.textContent = userData.name;
+    profileActivity.textContent = userData.about;
+    myId = userData._id;
+    cards.forEach((card) => {
+      const isMyCard = card.owner._id === myId;
+      const isLike = card.likes.some((user) => user._id === myId);
       renderCard(
-        item.name,
-        item.link,
-        item.likes.length,
-        item._id,
+        card.name,
+        card.link,
+        card.likes.length,
+        card._id,
         isMyCard,
         isLike
       );
     });
   })
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch((err) => console.log(err));
 
 enableValidation(validationConfig);
 
@@ -81,14 +61,6 @@ btnAddCard.addEventListener("click", () => {
   formCard.reset();
   resetFormCondition(validationConfig, cardPopup);
   openPopup(cardPopup);
-});
-
-profileAvatar.addEventListener("mouseover", () => {
-  btnEditAvatar.style.visibility = "visible";
-});
-
-btnEditAvatar.addEventListener("mouseout", (evt) => {
-  evt.target.style.visibility = "hidden";
 });
 
 btnEditAvatar.addEventListener("click", () => {
