@@ -15,12 +15,14 @@ import {
   btnEditAvatar,
   avatarPopup,
   formAvatar,
+  formConfirm,
 } from "./components/constants";
 import {
   openPopup,
   submitEditProfileForm,
   submitAddCardForm,
   submitEditAvatar,
+  submitConfirmDelete
 } from "./components/modal";
 import { enableValidation, resetFormCondition } from "./components/validate";
 import { getCards, getUserInfo } from "./components/api";
@@ -72,3 +74,4 @@ btnEditAvatar.addEventListener("click", () => {
 formProfile.addEventListener("submit", submitEditProfileForm);
 formCard.addEventListener("submit", submitAddCardForm);
 formAvatar.addEventListener("submit", submitEditAvatar);
+formConfirm.addEventListener("submit", submitConfirmDelete)
