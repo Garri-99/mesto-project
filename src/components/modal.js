@@ -1,6 +1,11 @@
-import { body, popups } from "./constants";
-import { patchEditAvatar, patchEditProfile, postAddCard } from "./api";
-import { renderCard } from "./card";
+import { body, btnConfirmSubmit, confirmationPopup, popups } from "./constants";
+import {
+  patchEditAvatar,
+  patchEditProfile,
+  postAddCard,
+  deleteCard,
+} from "./api";
+import { renderCard, card } from "./card";
 import {
   profileName,
   profileActivity,
@@ -39,13 +44,17 @@ export function closePopup(popup) {
 export function submitEditProfileForm(evt) {
   evt.preventDefault();
 
-  profileName.textContent = nameInput.value;
-  profileActivity.textContent = activityInput.value;
   renderLoading(true, btnProfileSubmit);
   patchEditProfile(nameInput.value, activityInput.value)
-    .then(() => closePopup(profilePopup))
+    .then(() => {
+      profileName.textContent = nameInput.value;
+      profileActivity.textContent = activityInput.value;
+      closePopup(profilePopup);
+    })
     .catch((err) => console.log(err))
-    .finally(() => renderLoading(false, btnProfileSubmit));
+    .finally(() =>
+      setTimeout(() => renderLoading(false, btnProfileSubmit), 1000)
+    );
 }
 
 export function submitAddCardForm(evt) {
@@ -58,18 +67,37 @@ export function submitAddCardForm(evt) {
       closePopup(cardPopup);
     })
     .catch((err) => console.log(err))
-    .finally(() => renderLoading(false, btnCardSubmit, "Создать"));
+    .finally(() =>
+      setTimeout(() => renderLoading(false, btnCardSubmit, 'Создать'), 1000)
+    );
 }
 
 export function submitEditAvatar(evt) {
   evt.preventDefault();
 
   renderLoading(true, btnAvatarSubmit);
-  profileAvatar.src = avatarInput.value;
   patchEditAvatar(avatarInput.value)
-    .then(() => closePopup(avatarPopup))
+    .then(() => {
+      profileAvatar.src = avatarInput.value;
+      closePopup(avatarPopup);
+    })
     .catch((err) => console.log(err))
-    .finally(() => renderLoading(false, btnAvatarSubmit));
+    .finally(() =>
+      setTimeout(() => renderLoading(false, btnAvatarSubmit), 1000)
+    );
+}
+
+export function submitConfirmDelete() {
+  renderLoading(true, btnConfirmSubmit, null, 'Удаление...');
+  deleteCard(card.id)
+    .then(() => {
+      card.remove();
+      closePopup(confirmationPopup);
+    })
+    .catch((err) => console.log(err))
+    .finally(() =>
+      setTimeout(() => renderLoading(false, btnConfirmSubmit, "Да"), 1000)
+    );
 }
 
 popups.forEach((popup) => {

@@ -13,6 +13,7 @@
 @import url(../blocks/popup/__image-caption/popup__image-caption.css);
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__title/_delete/form__title_delete.css);
 @import url(../blocks/form/__field/form__field.css);
 @import url(../blocks/form/__field/_error/form__field_error.css);
 @import url(../blocks/form/__submit/form__submit.css);

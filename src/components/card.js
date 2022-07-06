@@ -1,21 +1,23 @@
-import { deleteCard, deleteLike, putLike } from "./api";
+import { deleteLike, putLike } from "./api";
 import {
   imagePopup,
   popupPic,
   popupImageCaption,
   cardTemplate,
   cardsContainer,
+  confirmationPopup,
 } from "./constants";
 import { openPopup } from "./modal";
+export let card;
 
-function handlerCardClick(name, src) {
+function handleCardClick(name, src) {
   popupPic.src = src;
   popupPic.alt = name;
   popupImageCaption.textContent = name;
   openPopup(imagePopup);
 }
 
-function handlerLikeClick(evt) {
+function handleLikeClick(evt) {
   const card = evt.target.closest(".element");
   const likeCount = card.querySelector(".element__like-count");
   if (!evt.target.classList.contains("element__like_active")) {
@@ -39,10 +41,9 @@ function handlerLikeClick(evt) {
   }
 }
 
-function handlerResetClick(evt) {
-  deleteCard(evt.target.closest(".element").id)
-    .then(() => evt.target.closest(".element").remove())
-    .catch((err) => console.log(err));
+function handleResetClick(evt) {
+  card = evt.target.closest(".element")
+  openPopup(confirmationPopup)
 }
 
 function createCard(
@@ -63,9 +64,9 @@ function createCard(
   cardPic.alt = cardName;
   cardElement.querySelector(".element__text").textContent = cardName;
 
-  cardPic.addEventListener("click", () => handlerCardClick(cardName, imgSrc));
+  cardPic.addEventListener("click", () => handleCardClick(cardName, imgSrc));
 
-  likeElement.addEventListener("click", handlerLikeClick);
+  likeElement.addEventListener("click", handleLikeClick);
 
   cardElement.querySelector(".element__like-count").textContent = count;
 
@@ -75,7 +76,7 @@ function createCard(
 
   if (isMyCard) {
     btnReset.classList.add("element__reset_active");
-    btnReset.addEventListener("click", handlerResetClick);
+    btnReset.addEventListener("click", handleResetClick);
   }
   return cardElement;
 }
