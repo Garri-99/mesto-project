@@ -5,7 +5,7 @@ import {
   postAddCard,
   deleteCard,
 } from "./api";
-import { renderCard, card } from "./card";
+import { renderCard, card } from "./Card";
 import {
   profileName,
   profileActivity,

@@ -52,27 +52,42 @@ validateFormAvatar.enableValidation();
 
 let myId;
 
-enableValidation(validationConfig);
-
-btnEditProfile.addEventListener("click", () => {
-  nameInput.value = profileName.textContent;
-  activityInput.value = profileActivity.textContent;
-  resetFormCondition(validationConfig, profilePopup);
-  openPopup(profilePopup);
-});
-btnAddCard.addEventListener("click", () => {
-  formCard.reset();
-  resetFormCondition(validationConfig, cardPopup);
-  openPopup(cardPopup);
-});
-
-btnEditAvatar.addEventListener("click", () => {
-  formAvatar.reset();
-  resetFormCondition(validationConfig, avatarPopup);
-  openPopup(avatarPopup);
-});
-
-formProfile.addEventListener("submit", submitEditProfileForm);
-formCard.addEventListener("submit", submitAddCardForm);
-formAvatar.addEventListener("submit", submitEditAvatar);
-formConfirm.addEventListener("submit", submitConfirmDelete)
+const cardsSection = new Section((data) => {
+  const newCard = new Card(
+    {
+      data,
+      myId,
+      handleCardClick: popupImage.open.bind(popupImage),
+      handleResetClick: (evt) => {
+        popupConfirm.open(evt.target.closest(".element"));
+      },
+      handleLikeClick: (evt) => {
+        const card = evt.target.closest(".element");
+        const likeCount = card.querySelector(".element__like-count");
+        if (!evt.target.classList.contains("element__like_active")) {
+          api
+            .putLike(card.id)
+            .then((res) => {
+              likeCount.textContent = res.likes.length;
+              evt.target.classList.toggle("element__like_active");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          api
+            .deleteLike(card.id)
+            .then((res) => {
+              likeCount.textContent = res.likes.length;
+              evt.target.classList.toggle("element__like_active");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }
+      },
+    },
+    "#card-template"
+  );
+  cardsSection.addItem(newCard.createCard());
+}, ".elements");
