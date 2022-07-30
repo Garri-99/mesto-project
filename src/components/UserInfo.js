@@ -1,22 +1,24 @@
 export class UserInfo {
-  constructor(
-    { profileName, profileActivity },
-    { apiGetUserInfo, apiPatchEditProfile }
-  ) {
+  constructor({ profileName, profileActivity, profileAvatar }) {
     this._nameElem = profileName;
     this._activityElem = profileActivity;
-    this._apiGetUserInfo = apiGetUserInfo;
-    this._apiPatchEditProfile = apiPatchEditProfile;
+    this._avatarElem = profileAvatar;
   }
 
   getUserInfo() {
-    return this._apiGetUserInfo();
+    return {
+      name: this._nameElem.textContent,
+      activity: this._activityElem.textContent,
+      avatar: this._avatarElem.src,
+    };
   }
 
   setUserInfo(newName, newActivity) {
-    return this._apiPatchEditProfile(newName, newActivity).then(() => {
-      this._nameElem.textContent = newName;
-      this._activityElem.textContent = newActivity;
-    });
+    this._nameElem.textContent = newName;
+    this._activityElem.textContent = newActivity;
+  }
+
+  setUserAvatar(newSrc) {
+    this._avatarElem.src = newSrc;
   }
 }

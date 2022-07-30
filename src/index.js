@@ -35,13 +35,7 @@ const api = new Api({
   },
 });
 
-const user = new UserInfo(
-  { profileName, profileActivity, profileAvatar },
-  {
-    apiGetUserInfo: api.getUserInfo.bind(api),
-    apiPatchEditProfile: api.patchEditProfile.bind(api),
-  }
-);
+const user = new UserInfo({ profileName, profileActivity, profileAvatar });
 
 const validateFormProfile = new FormValidator(validationConfig, formProfile);
 const validateFormCard = new FormValidator(validationConfig, formCard);
@@ -98,8 +92,9 @@ popupImage.setEventListeners();
 const popupProfile = new PopupWithForm("#profile-popup", (formValues) => {
   renderLoading(true, btnProfileSubmit);
   user
-    .setUserInfo(formValues.firstname, formValues.activity)
+    .api.patchEditProfile(formValues.firstname, formValues.activity)
     .then(() => {
+      user.setUserInfo(formValues.firstname, formValues.activity);
       popupProfile.close();
     })
     .catch((err) => console.log(err))
@@ -129,7 +124,7 @@ const popupAvatar = new PopupWithForm("#avatar-popup", (formValues) => {
   api
     .patchEditAvatar(formValues["url-avatar"])
     .then(() => {
-      profileAvatar.src = formValues["url-avatar"];
+      user.setUserAvatar(formValues["url-avatar"]);
       popupAvatar.close();
     })
     .catch((err) => console.log(err))
@@ -154,32 +149,30 @@ const popupConfirm = new PopupWithConfirm("#confirm-popup", (card) => {
 });
 popupConfirm.setEventListeners();
 
-Promise.all([user.getUserInfo(), api.getCards()])
+Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
-    profileAvatar.src = userData.avatar;
-    profileName.textContent = userData.name;
-    profileActivity.textContent = userData.about;
+    user.setUserInfo(userData.name, userData.about)
+    user.setUserAvatar(userData.avatar);
+    console.log(userData.avatar)
     myId = userData._id;
     cardsSection.renderItems(cards);
   })
   .catch((err) => console.log(err));
 
-  btnEditProfile.addEventListener("click", () => {
-    user.getUserInfo().then((res) => {
-      nameInput.value = res.name;
-      activityInput.value = res.about;
-      validateFormProfile.resetFormCondition();
-      popupProfile.open();
-    });
-  });
+btnEditProfile.addEventListener("click", () => {
+    nameInput.value = user.getUserInfo().name;
+    activityInput.value = user.getUserInfo().about;
+    validateFormProfile.resetFormCondition();
+    popupProfile.open();
+});
 
-  btnAddCard.addEventListener("click", () => {
-    validateFormCard.resetFormCondition();
-    popupCard.open();
-  });
+btnAddCard.addEventListener("click", () => {
+  validateFormCard.resetFormCondition();
+  popupCard.open();
+});
 
-  btnEditAvatar.addEventListener("click", () => {
-    formAvatar.reset();
-    validateFormAvatar.resetFormCondition();
-    popupAvatar.open();
-  });
+btnEditAvatar.addEventListener("click", () => {
+  formAvatar.reset();
+  validateFormAvatar.resetFormCondition();
+  popupAvatar.open();
+});
