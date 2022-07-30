@@ -35,14 +35,15 @@ const api = new Api({
   },
 });
 
-    profileActivity.textContent = userData.about;
-    myId = userData._id;
-    cards.forEach((card) => {
-      const isMyCard = card.owner._id === myId;
-      const isLike = card.likes.some((user) => user._id === myId);
-      renderCard(
-        card.name,
-        card.link,
+const user = new UserInfo(
+  { profileName, profileActivity, profileAvatar },
+  {
+    apiGetUserInfo: api.getUserInfo.bind(api),
+    apiPatchEditProfile: api.patchEditProfile.bind(api),
+  }
+);
+
+
         card.likes.length,
         card._id,
         isMyCard,
