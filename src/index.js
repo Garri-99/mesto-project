@@ -163,3 +163,23 @@ Promise.all([user.getUserInfo(), api.getCards()])
     cardsSection.renderItems(cards);
   })
   .catch((err) => console.log(err));
+
+  btnEditProfile.addEventListener("click", () => {
+    user.getUserInfo().then((res) => {
+      nameInput.value = res.name;
+      activityInput.value = res.about;
+      validateFormProfile.resetFormCondition();
+      popupProfile.open();
+    });
+  });
+
+  btnAddCard.addEventListener("click", () => {
+    validateFormCard.resetFormCondition();
+    popupCard.open();
+  });
+
+  btnEditAvatar.addEventListener("click", () => {
+    formAvatar.reset();
+    validateFormAvatar.resetFormCondition();
+    popupAvatar.open();
+  });
