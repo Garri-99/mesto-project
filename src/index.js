@@ -43,15 +43,14 @@ const user = new UserInfo(
   }
 );
 
+const validateFormProfile = new FormValidator(validationConfig, formProfile);
+const validateFormCard = new FormValidator(validationConfig, formCard);
+const validateFormAvatar = new FormValidator(validationConfig, formAvatar);
+validateFormProfile.enableValidation();
+validateFormCard.enableValidation();
+validateFormAvatar.enableValidation();
 
-        card.likes.length,
-        card._id,
-        isMyCard,
-        isLike
-      );
-    });
-  })
-  .catch((err) => console.log(err));
+let myId;
 
 enableValidation(validationConfig);
 
