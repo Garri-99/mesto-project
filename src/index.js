@@ -94,3 +94,47 @@ const cardsSection = new Section((data) => {
 
 const popupImage = new PopupWithImage("#image-popup");
 popupImage.setEventListeners();
+
+const popupProfile = new PopupWithForm("#profile-popup", (formValues) => {
+  renderLoading(true, btnProfileSubmit);
+  user
+    .setUserInfo(formValues.firstname, formValues.activity)
+    .then(() => {
+      popupProfile.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(() =>
+      setTimeout(() => renderLoading(false, btnProfileSubmit), 1000)
+    );
+});
+popupProfile.setEventListeners();
+
+const popupCard = new PopupWithForm("#card-popup", (formValues) => {
+  renderLoading(true, btnCardSubmit);
+  api
+    .postAddCard(formValues.title, formValues.url)
+    .then((res) => {
+      cardsSection.renderItems([res]);
+      popupCard.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(() =>
+      setTimeout(() => renderLoading(false, btnCardSubmit, "Создать"), 1000)
+    );
+});
+popupCard.setEventListeners();
+
+const popupAvatar = new PopupWithForm("#avatar-popup", (formValues) => {
+  renderLoading(true, btnAvatarSubmit);
+  api
+    .patchEditAvatar(formValues["url-avatar"])
+    .then(() => {
+      profileAvatar.src = formValues["url-avatar"];
+      popupAvatar.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(() =>
+      setTimeout(() => renderLoading(false, btnAvatarSubmit), 1000)
+    );
+});
+popupAvatar.setEventListeners();
