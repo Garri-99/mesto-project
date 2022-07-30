@@ -155,13 +155,13 @@ Promise.all([api.getUserInfo(), api.getCards()])
     user.setUserAvatar(userData.avatar);
     console.log(userData.avatar)
     myId = userData._id;
-    cardsSection.renderItems(cards);
+    cardsSection.renderItems(cards.reverse());
   })
   .catch((err) => console.log(err));
 
 btnEditProfile.addEventListener("click", () => {
     nameInput.value = user.getUserInfo().name;
-    activityInput.value = user.getUserInfo().about;
+    activityInput.value = user.getUserInfo().activity;
     validateFormProfile.resetFormCondition();
     popupProfile.open();
 });
