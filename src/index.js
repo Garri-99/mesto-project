@@ -138,3 +138,28 @@ const popupAvatar = new PopupWithForm("#avatar-popup", (formValues) => {
     );
 });
 popupAvatar.setEventListeners();
+
+const popupConfirm = new PopupWithConfirm("#confirm-popup", (card) => {
+  renderLoading(true, btnConfirmSubmit, null, "Удаление...");
+  api
+    .deleteCard(card.id)
+    .then(() => {
+      card.remove();
+      popupConfirm.close();
+    })
+    .catch((err) => console.log(err))
+    .finally(() =>
+      setTimeout(() => renderLoading(false, btnConfirmSubmit, "Да"), 1000)
+    );
+});
+popupConfirm.setEventListeners();
+
+Promise.all([user.getUserInfo(), api.getCards()])
+  .then(([userData, cards]) => {
+    profileAvatar.src = userData.avatar;
+    profileName.textContent = userData.name;
+    profileActivity.textContent = userData.about;
+    myId = userData._id;
+    cardsSection.renderItems(cards);
+  })
+  .catch((err) => console.log(err));
