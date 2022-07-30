@@ -91,3 +91,6 @@ const cardsSection = new Section((data) => {
   );
   cardsSection.addItem(newCard.createCard());
 }, ".elements");
+
+const popupImage = new PopupWithImage("#image-popup");
+popupImage.setEventListeners();
