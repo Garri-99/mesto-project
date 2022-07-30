@@ -1,7 +1,5 @@
 import "./pages/index.css";
 import {
-  profilePopup,
-  cardPopup,
   btnAddCard,
   btnEditProfile,
   formCard,
@@ -13,27 +11,30 @@ import {
   activityInput,
   validationConfig,
   btnEditAvatar,
-  avatarPopup,
   formAvatar,
-  formConfirm,
+  btnProfileSubmit,
+  btnCardSubmit,
+  btnAvatarSubmit,
+  btnConfirmSubmit,
 } from "./components/constants";
-import {
-  openPopup,
-  submitEditProfileForm,
-  submitAddCardForm,
-  submitEditAvatar,
-  submitConfirmDelete
-} from "./components/modal";
-import { enableValidation, resetFormCondition } from "./components/validate";
-import { getCards, getUserInfo } from "./components/api";
-import { renderCard } from "./components/card";
+import { FormValidator } from "./components/FormValidator";
+import { Card } from "./components/Card";
+import { Section } from "./components/Section";
+import { PopupWithImage } from "./components/PopupWithImage";
+import { PopupWithForm } from "./components/PopupWithForm";
+import { renderLoading } from "./components/utils";
+import { PopupWithConfirm } from "./components/PopupWithConfirm";
+import { Api } from "./components/Api.js";
+import { UserInfo } from "./components/UserInfo";
 
-let myId;
+const api = new Api({
+  baseUrl: "https://nomoreparties.co/v1/plus-cohort-13",
+  headers: {
+    authorization: "3bc54813-3658-4b8a-b68f-e51cf1301e4a",
+    "Content-Type": "application/json",
+  },
+});
 
-Promise.all([getUserInfo(), getCards()])
-  .then(([userData, cards]) => {
-    profileAvatar.src = userData.avatar;
-    profileName.textContent = userData.name;
     profileActivity.textContent = userData.about;
     myId = userData._id;
     cards.forEach((card) => {
