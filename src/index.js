@@ -82,7 +82,6 @@ const cardsSection = new Section((data) => {
     "#card-template"
   );
   return newCard.createCard();
-
 }, ".elements");
 
 const popupImage = new PopupWithImage("#image-popup");
@@ -90,8 +89,8 @@ popupImage.setEventListeners();
 
 const popupProfile = new PopupWithForm("#profile-popup", (formValues) => {
   renderLoading(true, btnProfileSubmit);
-  user
-    .api.patchEditProfile(formValues.firstname, formValues.activity)
+  api
+    .patchEditProfile(formValues.firstname, formValues.activity)
     .then(() => {
       user.setUserInfo(formValues.firstname, formValues.activity);
       popupProfile.close();
@@ -150,7 +149,7 @@ popupConfirm.setEventListeners();
 
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
-    user.setUserInfo(userData.name, userData.about)
+    user.setUserInfo(userData.name, userData.about);
     user.setUserAvatar(userData.avatar);
     myId = userData._id;
     cardsSection.renderItems(cards.reverse());
@@ -158,10 +157,10 @@ Promise.all([api.getUserInfo(), api.getCards()])
   .catch((err) => console.log(err));
 
 btnEditProfile.addEventListener("click", () => {
-    nameInput.value = user.getUserInfo().name;
-    activityInput.value = user.getUserInfo().activity;
-    validateFormProfile.resetFormCondition();
-    popupProfile.open();
+  nameInput.value = user.getUserInfo().name;
+  activityInput.value = user.getUserInfo().activity;
+  validateFormProfile.resetFormCondition();
+  popupProfile.open();
 });
 
 btnAddCard.addEventListener("click", () => {
