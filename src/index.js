@@ -36,7 +36,7 @@ const api = new Api({
 });
 
 const user = new UserInfo({ profileName, profileActivity, profileAvatar });
-
+let cardToDelete = null;
 const validateFormProfile = new FormValidator(validationConfig, formProfile);
 const validateFormCard = new FormValidator(validationConfig, formCard);
 const validateFormAvatar = new FormValidator(validationConfig, formAvatar);
@@ -53,6 +53,7 @@ const cardsSection = new Section((data) => {
       myId,
       handleCardClick: popupImage.open.bind(popupImage),
       handleResetClick: (evt) => {
+        cardToDelete = newCard;
         popupConfirm.open(evt.target.closest(".element"));
       },
       handleLikeClick: (evt) => {
@@ -81,6 +82,7 @@ const cardsSection = new Section((data) => {
     "#card-template"
   );
   return newCard.createCard();
+
 }, ".elements");
 
 const popupImage = new PopupWithImage("#image-popup");
@@ -136,7 +138,7 @@ const popupConfirm = new PopupWithConfirm("#confirm-popup", (card) => {
   api
     .deleteCard(card.id)
     .then(() => {
-      card.remove();
+      cardToDelete.deleteCard(card);
       popupConfirm.close();
     })
     .catch((err) => console.log(err))

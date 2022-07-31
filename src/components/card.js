@@ -18,6 +18,10 @@ cardlikehandler(res, card, evt){
   evt.target.classList.toggle("element__like_active");
 }
 
+deleteCard (card) {
+  card.remove();
+}
+
   _getElement() {
     return document
       .querySelector(this._templateSelector)
@@ -51,6 +55,7 @@ cardlikehandler(res, card, evt){
       btnReset.classList.add("element__reset_active");
       btnReset.addEventListener("click", (evt) => this._handleResetClick(evt));
     }
+    this._cardElement = cardElement;
     return cardElement;
   }
 }
