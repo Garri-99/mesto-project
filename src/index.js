@@ -57,13 +57,11 @@ const cardsSection = new Section((data) => {
       },
       handleLikeClick: (evt) => {
         const card = evt.target.closest(".element");
-        const likeCount = card.querySelector(".element__like-count");
         if (!evt.target.classList.contains("element__like_active")) {
           api
             .putLike(card.id)
             .then((res) => {
-              likeCount.textContent = res.likes.length;
-              evt.target.classList.toggle("element__like_active");
+              newCard.cardlikehandler(res, card, evt);
             })
             .catch((err) => {
               console.log(err);
@@ -72,8 +70,7 @@ const cardsSection = new Section((data) => {
           api
             .deleteLike(card.id)
             .then((res) => {
-              likeCount.textContent = res.likes.length;
-              evt.target.classList.toggle("element__like_active");
+              newCard.cardlikehandler(res, card, evt);
             })
             .catch((err) => {
               console.log(err);
@@ -83,7 +80,7 @@ const cardsSection = new Section((data) => {
     },
     "#card-template"
   );
-  cardsSection.addItem(newCard.createCard());
+  return newCard.createCard();
 }, ".elements");
 
 const popupImage = new PopupWithImage("#image-popup");
@@ -109,7 +106,7 @@ const popupCard = new PopupWithForm("#card-popup", (formValues) => {
   api
     .postAddCard(formValues.title, formValues.url)
     .then((res) => {
-      cardsSection.renderItems([res]);
+      cardsSection.addItem(res);
       popupCard.close();
     })
     .catch((err) => console.log(err))

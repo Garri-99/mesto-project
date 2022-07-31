@@ -12,6 +12,12 @@ export class Card {
     this._handleResetClick = handleResetClick;
   }
 
+cardlikehandler(res, card, evt){
+  const likeCount = card.querySelector(".element__like-count")
+  likeCount.textContent = res.likes.length;
+  evt.target.classList.toggle("element__like_active");
+}
+
   _getElement() {
     return document
       .querySelector(this._templateSelector)
@@ -20,6 +26,7 @@ export class Card {
   }
 
   createCard() {
+
     const cardElement = this._getElement();
     const cardPic = cardElement.querySelector(".element__pic");
     const btnReset = cardElement.querySelector(".element__reset");
