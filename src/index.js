@@ -150,7 +150,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
     user.setUserInfo(userData.name, userData.about)
     user.setUserAvatar(userData.avatar);
-    console.log(userData.avatar)
     myId = userData._id;
     cardsSection.renderItems(cards.reverse());
   })

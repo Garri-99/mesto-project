@@ -13,8 +13,7 @@ export class Card {
   }
 
 cardlikehandler(res, card, evt){
-  const likeCount = card.querySelector(".element__like-count")
-  likeCount.textContent = res.likes.length;
+  card.querySelector(".element__like-count").textContent = res.likes.length;
   evt.target.classList.toggle("element__like_active");
 }
 
@@ -23,6 +22,10 @@ cardlikehandler(res, card, evt){
       .querySelector(this._templateSelector)
       .content.querySelector(".element")
       .cloneNode(true);
+  }
+
+  delete() {
+    this.remove();
   }
 
   createCard() {
