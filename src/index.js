@@ -36,7 +36,6 @@ const api = new Api({
 });
 
 const user = new UserInfo({ profileName, profileActivity, profileAvatar });
-let cardToDelete = null;
 const validateFormProfile = new FormValidator(validationConfig, formProfile);
 const validateFormCard = new FormValidator(validationConfig, formCard);
 const validateFormAvatar = new FormValidator(validationConfig, formAvatar);
@@ -45,6 +44,7 @@ validateFormCard.enableValidation();
 validateFormAvatar.enableValidation();
 
 let myId;
+let cardToDelete;
 
 const cardsSection = new Section((data) => {
   const newCard = new Card(

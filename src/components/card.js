@@ -28,10 +28,6 @@ deleteCard (card) {
       .cloneNode(true);
   }
 
-  delete() {
-    this.remove();
-  }
-
   createCard() {
 
     const cardElement = this._getElement();
