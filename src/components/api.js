@@ -1,79 +1,78 @@
-const config = {
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-13",
-  headers: {
-    authorization: "3bc54813-3658-4b8a-b68f-e51cf1301e4a",
-    "Content-Type": "application/json",
-  },
-};
-
-function checkResponse(res) {
-  if (res.ok) {
-    return res.json();
+export class Api {
+  constructor({ baseUrl, headers }) {
+    this.baseUrl = baseUrl;
+    this.headers = headers;
   }
-  return Promise.reject(`Ошибка ${res.status}`);
-}
 
-export function getUserInfo() {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers,
-  }).then(checkResponse);
-}
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка ${res.status}`);
+  }
 
-export function getCards() {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers,
-  }).then(checkResponse);
-}
+  getUserInfo() {
+    return fetch(`${this.baseUrl}/users/me`, {
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
 
-export function patchEditProfile(nameInput, activityInput) {
-  return fetch(`${config.baseUrl}/users/me`, {
-    method: "PATCH",
-    headers: config.headers,
-    body: JSON.stringify({
-      name: nameInput,
-      about: activityInput,
-    }),
-  }).then(checkResponse);
-}
+  getCards() {
+    return fetch(`${this.baseUrl}/cards`, {
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
 
-export function postAddCard(titleCard, srcCard) {
-  return fetch(`${config.baseUrl}/cards`, {
-    method: "POST",
-    headers: config.headers,
-    body: JSON.stringify({
-      name: titleCard,
-      link: srcCard,
-    }),
-  }).then(checkResponse);
-}
+  patchEditProfile(nameInput, activityInput) {
+    return fetch(`${this.baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        name: nameInput,
+        about: activityInput,
+      }),
+    }).then(this._checkResponse);
+  }
 
-export function deleteCard(id) {
-  return fetch(`${config.baseUrl}/cards/${id}`, {
-    method: "DELETE",
-    headers: config.headers,
-  }).then(checkResponse);
-}
+  postAddCard(titleCard, srcCard) {
+    return fetch(`${this.baseUrl}/cards`, {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify({
+        name: titleCard,
+        link: srcCard,
+      }),
+    }).then(this._checkResponse);
+  }
 
-export function putLike(id) {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
-    method: "PUT",
-    headers: config.headers,
-  }).then(checkResponse);
-}
+  deleteCard(id) {
+    return fetch(`${this.baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
 
-export function deleteLike(id) {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
-    method: "DELETE",
-    headers: config.headers,
-  }).then(checkResponse);
-}
+  putLike(id) {
+    return fetch(`${this.baseUrl}/cards/likes/${id}`, {
+      method: "PUT",
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
 
-export function patchEditAvatar(url) {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
-    method: "PATCH",
-    headers: config.headers,
-    body: JSON.stringify({
-      avatar: url,
-    }),
-  }).then(checkResponse);
+  deleteLike(id) {
+    return fetch(`${this.baseUrl}/cards/likes/${id}`, {
+      method: "DELETE",
+      headers: this.headers,
+    }).then(this._checkResponse);
+  }
+
+  patchEditAvatar(url) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this.headers,
+      body: JSON.stringify({
+        avatar: url,
+      }),
+    }).then(this._checkResponse);
+  }
 }

@@ -1,93 +1,60 @@
-import { deleteLike, putLike } from "./api";
-import {
-  imagePopup,
-  popupPic,
-  popupImageCaption,
-  cardTemplate,
-  cardsContainer,
-  confirmationPopup,
-} from "./constants";
-import { openPopup } from "./modal";
-export let card;
-
-function handleCardClick(name, src) {
-  popupPic.src = src;
-  popupPic.alt = name;
-  popupImageCaption.textContent = name;
-  openPopup(imagePopup);
-}
-
-function handleLikeClick(evt) {
-  const card = evt.target.closest(".element");
-  const likeCount = card.querySelector(".element__like-count");
-  if (!evt.target.classList.contains("element__like_active")) {
-    putLike(card.id)
-      .then((res) => {
-        likeCount.textContent = res.likes.length;
-        evt.target.classList.toggle("element__like_active");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  } else {
-    deleteLike(card.id)
-      .then((res) => {
-        likeCount.textContent = res.likes.length;
-        evt.target.classList.toggle("element__like_active");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-}
-
-function handleResetClick(evt) {
-  card = evt.target.closest(".element")
-  openPopup(confirmationPopup)
-}
-
-function createCard(
-  cardName,
-  imgSrc,
-  count,
-  id,
-  isMyCard = false,
-  isLike = false
-) {
-  const cardElement = cardTemplate.querySelector(".element").cloneNode(true);
-  const cardPic = cardElement.querySelector(".element__pic");
-  const btnReset = cardElement.querySelector(".element__reset");
-  const likeElement = cardElement.querySelector(".element__like");
-
-  cardElement.id = id;
-  cardPic.src = imgSrc;
-  cardPic.alt = cardName;
-  cardElement.querySelector(".element__text").textContent = cardName;
-
-  cardPic.addEventListener("click", () => handleCardClick(cardName, imgSrc));
-
-  likeElement.addEventListener("click", handleLikeClick);
-
-  cardElement.querySelector(".element__like-count").textContent = count;
-
-  if (isLike) {
-    likeElement.classList.add("element__like_active");
+export class Card {
+  constructor(
+    { data, handleCardClick, handleLikeClick, handleResetClick, myId },
+    templateSelector
+  ) {
+    this._cardData = data;
+    this._isMyCard = data.owner._id === myId;
+    this._isLike = data.likes.some(user => user._id === myId);
+    this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
+    this._handleLikeClick = handleLikeClick;
+    this._handleResetClick = handleResetClick;
   }
 
-  if (isMyCard) {
-    btnReset.classList.add("element__reset_active");
-    btnReset.addEventListener("click", handleResetClick);
-  }
-  return cardElement;
+cardlikehandler(res, card, evt){
+  card.querySelector(".element__like-count").textContent = res.likes.length;
+  evt.target.classList.toggle("element__like_active");
 }
 
-export function renderCard(
-  name,
-  src,
-  count,
-  id,
-  isMyCard = false,
-  isLike = false
-) {
-  cardsContainer.prepend(createCard(name, src, count, id, isMyCard, isLike));
+deleteCard (card) {
+  card.remove();
+}
+
+  _getElement() {
+    return document
+      .querySelector(this._templateSelector)
+      .content.querySelector(".element")
+      .cloneNode(true);
+  }
+
+  createCard() {
+
+    const cardElement = this._getElement();
+    const cardPic = cardElement.querySelector(".element__pic");
+    const btnReset = cardElement.querySelector(".element__reset");
+    const likeElement = cardElement.querySelector(".element__like");
+
+    cardElement.id = this._cardData._id;
+    cardPic.src = this._cardData.link;
+    cardPic.alt = this._cardData.name;
+    cardElement.querySelector(".element__text").textContent = this._cardData.name;
+
+    cardPic.addEventListener("click", () => this._handleCardClick(this._cardData.name, this._cardData.link));
+
+    likeElement.addEventListener("click", (evt) => this._handleLikeClick(evt));
+
+    cardElement.querySelector(".element__like-count").textContent = this._cardData.likes.length;
+
+    if (this._isLike) {
+      likeElement.classList.add("element__like_active");
+    }
+
+    if (this._isMyCard) {
+      btnReset.classList.add("element__reset_active");
+      btnReset.addEventListener("click", (evt) => this._handleResetClick(evt));
+    }
+    this._cardElement = cardElement;
+    return cardElement;
+  }
 }
